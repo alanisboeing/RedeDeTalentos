@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>RT Rede de Talentos - Cadastro de Áreas</title>
+    <link rel="stylesheet" href="/src/css/area-atuacao.css" />
+    <link rel="stylesheet" href="../css/topbar.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Topbar será injetada dinamicamente pelo topbar.js -->
+
+    <main>
+      <section class="container-principal">
+        <!-- Formulário de cadastro -->
+        <div class="banner-topo">
+          <h1>Áreas de <span class="gradient-text">Atuação</span></h1>
+          <p class="subtext">Cadastro e Edição de áreas de talento</p>
+        </div>
+
+        <div class="menu-box">
+          <h3><i class="fa-solid fa-briefcase"></i> Nova Área de Atuação</h3>
+          <div class="menu1">
+            <div class="campo">
+              <label for="area">Informe a Área de Atuação:</label>
+              <span>
+                <input type="text" id="area" required />
+                <button class="btn botao-salvar">Salvar</button>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabela de listagem -->
+        <div class="menu-box">
+          <h3><i class="fa-solid fa-list"></i> Áreas Cadastradas</h3>
+          <table class="tabela-listagem">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabela-atuacoes"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/src/js/topbar.js"></script>
+    <script src="/src/js/footer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/src/js/suppabase-api.js"></script>
+
+    <script>
+      const inputArea = document.getElementById("area");
+      const botaoSalvar = document.querySelector(".botao-salvar");
+      const tabela = document.getElementById("tabela-atuacoes");
+
+      let idEmEdicao = null;
+
+      async function carregarAtuacoes() {
+        try {
+          const atuacoes = await window.supabaseApi.getAll("atuacao");
+          tabela.innerHTML = "";
+
+          atuacoes.forEach((area) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+            <td>${area.id}</td>
+            <td>${area.nome}</td>
+            <td class="acoes">
+              <button class="icon-btn"  onclick="editarAtuacao(${
+                area.id
+              }, '${area.nome.replace(
+              /'/g,
+              "\\'"
+            )}')"> <i class="fas fa-pen"></i></button>
+              <button class="icon-btn" onclick="excluirAtuacao(${
+                area.id
+              })"> <i class="fas fa-trash"></i></button>
+            </td>
+          `;
+            tabela.appendChild(row);
+          });
+        } catch (error) {
+          console.error("Erro ao carregar áreas:", error);
+        }
+      }
+
+      botaoSalvar.addEventListener("click", async () => {
+        const nome = inputArea.value.trim();
+        if (!nome) return alert("Informe a área de atuação.");
+
+        try {
+          if (idEmEdicao) {
+            // Atualização
+            await window.supabaseApi.update("atuacao", `id=eq.${idEmEdicao}`, {
+              nome,
+            });
+            idEmEdicao = null;
+            botaoSalvar.textContent = "Salvar";
+          } else {
+            // Criação
+            await window.supabaseApi.create("atuacao", { nome });
+          }
+
+          inputArea.value = "";
+          await carregarAtuacoes();
+        } catch (error) {
+          console.error("Erro ao salvar:", error);
+          alert("Erro ao salvar área.");
+        }
+      });
+
+      window.excluirAtuacao = async function (id) {
+        if (!confirm("Deseja realmente excluir esta área?")) return;
+
+        try {
+          await window.supabaseApi.remove("atuacao", `id=eq.${id}`);
+          await carregarAtuacoes();
+        } catch (error) {
+          console.error("Erro ao excluir:", error);
+        }
+      };
+
+      window.editarAtuacao = function (id, nomeAtual) {
+        inputArea.value = nomeAtual;
+        idEmEdicao = id;
+        botaoSalvar.textContent = "Atualizar";
+        inputArea.focus();
+      };
+
+      carregarAtuacoes();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+/* Já deve existir no seu topbar.css */
+.topbar {
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .topbar-container {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .logo-img {
+    height: 40px;
+    object-fit: contain;
+  }
+  
+  /* Dropdown */
+  .dropdown {
+    position: relative;
+  }
+  
+  .btn-adm {
+    font-size: 0.9rem;
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid #6366f1;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+  
+  .btn-adm:hover {
+    background-color: #f0f0ff;
+  }
+  
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 20;
+    min-width: 160px;
+  }
+  
+  .dropdown-menu a {
+    display: block;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+  
+  .dropdown-menu a:hover {
+    background-color: #f0f0ff;
+  }
+  
+  /* Exibe o dropdown no hover */
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 20;
+    min-width: 160px;
+  }
+  
+  .dropdown-menu.show-dropdown {
+    display: block;
+  }
+  
+  

@@ -1,0 +1,142 @@
+
+
+
+
+/* Botão voltar */
+.voltar-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 24px;
+}
+
+.btn-voltar {
+  background: linear-gradient(90deg, #7c3aed, #38bdf8);
+  border: none;
+  padding: 10px 16px;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 4rem;
+  transition: background 0.3s ease;
+}
+
+/* Título e subtítulo */
+h1 {
+  font-size: 2.2rem;
+  font-weight: bolder;
+  color: #1e1e1e;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #7c3aed, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.subtext {
+  color: #4b5563;
+  text-align: center;
+}
+
+/* Container principal */
+.container-principal {
+  background: #ffffff;
+  width: 1000px;
+  margin: 2rem auto;
+  padding: 100px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #D9D9D9;
+}
+
+/* Banner */
+.banner-topo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+
+
+/* Layout interno dos campos */
+.menu1 {
+  width: 100%;
+  display: flex;
+  gap:1rem;
+}
+
+.campo label {
+  color: #424141;
+  font-weight: bold;
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.campo {
+  width: 100%;
+}
+
+.campo span {
+  display: grid;
+  grid-template-columns: 1fr auto; /* substitui 90% 10% de forma mais responsiva */
+  width: 100%;
+  align-items: center; /* centraliza verticalmente os elementos, se necessário */
+ /* opcional: adiciona espaçamento entre colunas */
+}
+
+
+
+
+.campo input,
+.menu-box input,
+.menu-box textarea {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #BCB9B9;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #424141;
+}
+
+/* Botão Salvar */
+
+
+/* Tabela de listagem */
+.tabela-listagem {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.tabela-listagem th,
+.tabela-listagem td {
+  border: 1px solid #BCB9B9;
+  padding: 10px;
+  text-align: left;
+}
+
+.tabela-listagem th {
+  background-color: #f3f4f6;
+}
+
+.tabela-listagem td button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+.tabela-listagem td button:hover {
+  opacity: 0.8;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>RT Rede de Talentos - Talentos Cadastrados</title>
+    <link rel="stylesheet" href="../css/topbar.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+
+    <link rel="stylesheet" href="../css/talentos.css" />
+    <link rel="stylesheet" href="../css/listagem-talentos.css" />
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+
+    <main>
+      <section class="container-principal">
+        <div class="titulo-container">
+          <h1>Banco de <span class="gradient-text">Talentos</span></h1>
+          <a href="/src/pages/cadastro-talento.html">
+            <button class="btn">Cadastrar Talento</button>
+          </a>
+        </div>
+
+        <div class="filtros-tags" id="filtros-tags">
+          <!-- As áreas de atuação serão carregadas aqui -->
+        </div>
+
+        <div class="grid-talentos" id="grid-talentos">
+          <!-- Cards dos talentos serão inseridos aqui -->
+        </div>
+      </section>
+    </main>
+
+    <!-- SCRIPTS -->
+    <script src="/src/js/topbar.js"></script>
+    <script src="/src/js/footer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/src/js/suppabase-api.js"></script>
+    <script type="module">
+      import { renderizarTalentos } from "/src/js/lista-talentos.js";
+      renderizarTalentos({
+        containerId: "grid-talentos",
+        filtrosId: "filtros-tags",
+        exibirAcoes: true
+      });
+    </script>
+    
+
+ 
+  </body>
+</html>

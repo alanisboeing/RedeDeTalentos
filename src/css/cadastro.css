@@ -1,0 +1,317 @@
+
+
+
+
+.voltar-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 24px;
+}
+
+.btn-voltar {
+  background: linear-gradient(90deg, #7c3aed, #38bdf8);
+  border: none;
+  padding: 10px 16px;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;                    
+  margin: 0;     
+  width: 4rem;              
+}
+
+.subtext {
+  color: #4b5563;
+  
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: bolder;
+  color: #1e1e1e;
+  margin: 0rem;
+  line-height: 1rem;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #7c3aed, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+/* Container principal (todos os menus) */
+.container-principal {
+  background: #ffffff;
+  max-width: 1000px;
+  margin: 32px auto;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #D9D9D9;
+}
+
+.banner-topo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Estilo geral dos menus-box */
+.menu-box {
+  background: #FBFCFC;
+  border: 1px solid #BCB9B9;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.menu-box h3 {
+  color: black;
+  font-weight: bold;
+  margin: 0 0 8px;
+}
+
+.menu-box h3 i {
+  color: #7A61FF;
+  margin-right: 10px;
+  vertical-align: middle;
+  font-size: 24px;
+}
+
+.menu-box h5 {
+  color: #5B5B5B;
+  font-weight: normal;
+  margin: 0 0 16px;
+}
+
+/* MENU 1 - Informações Pessoais */
+.menu1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+.campo label {
+  color: #424141;
+  font-weight: bold;
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+.campo input,
+.menu-box input,
+.menu-box textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #BCB9B9;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #424141;
+  box-sizing: border-box;
+}
+
+/* MENU 2 - Área de Atuação */
+.botoes-areas {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.area-btn {
+  background: #ffffff;
+  border: 1px solid #BCB9B9;
+  border-radius: 4px;
+  padding: 10px;
+  color: #424141;
+  font-weight: bold;
+  text-align: center;
+}
+
+.area-btn.selected {
+  background-color: #7c3aed;
+  color: white;
+  font-weight: 600;
+  border: 1px solid #5b21b6;
+  transition: background 0.3s ease;
+}
+
+
+/* MENU 3 - Experiências e Competências */
+.container-principal .menu-box:nth-of-type(3) {
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+.container-principal .menu-box:nth-of-type(3) label {
+  color: #424141;
+  font-weight: bold;
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+/* Botão final (Cadastrar como Talento) */
+.botao-finalizar {
+  background: none;
+  border: none;
+  padding: 0;
+  display: block;
+  margin: 24px auto 0;
+  cursor: pointer;
+}
+
+.botao-finalizar img {
+  width: 300px;
+  height: auto;
+  display: block;
+}
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #F9FAFB;
+  margin: 0;
+  padding: 0;
+  color: #424141;
+}
+
+
+header .logo {
+  height: 40px;
+  width: auto;
+}
+
+/* Container principal (todos os menus) */
+.container-principal {
+  background: #ffffff;
+  max-width: 1000px;
+  margin: 32px auto;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #D9D9D9;
+}
+
+/*.banner-topo {
+  text-align: center;
+  /*margin-bottom: 30px;
+}*/
+
+/* Estilo geral dos menus-box */
+.menu-box {
+  background: #FBFCFC;
+  border: 1px solid #BCB9B9;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.menu-box h3 {
+  color: black;
+  font-weight: bold;
+  margin: 0 0 8px;
+}
+
+.menu-box h3 i {
+  color: #7A61FF;
+  margin-right: 10px;
+  vertical-align: middle;
+  font-size: 24px;
+}
+
+.menu-box h5 {
+  color: #5B5B5B;
+  font-weight: normal;
+  margin: 0 0 16px;
+}
+
+/* MENU 1 - Informações Pessoais */
+.menu1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+.campo label {
+  color: #424141;
+  font-weight: bold;
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+.campo input,
+.menu-box input,
+.menu-box textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #BCB9B9;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #424141;
+  box-sizing: border-box;
+}
+
+/* MENU 2 - Área de Atuação */
+.botoes-areas {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.area-btn {
+  background: #ffffff;
+  border: 1px solid #BCB9B9;
+  border-radius: 4px;
+  padding: 10px;
+  color: #424141;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* MENU 3 - Experiências e Competências */
+.container-principal .menu-box:nth-of-type(3) {
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+.container-principal .menu-box:nth-of-type(3) label {
+  color: #424141;
+  font-weight: bold;
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+/* Botão final (Cadastrar como Talento) */
+.botao-finalizar {
+  background: linear-gradient(90deg, #7c3aed, #38bdf8);
+  border: none;
+  padding: 10px 80px;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centraliza conteúdo interno */
+  gap: 8px;
+  margin: 0 auto; /* centraliza o botão no container */
+  width: fit-content; /* se adapta ao conteúdo */              
+  }
+

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>RT Rede de Talentos - Cadastro</title>
+  <link rel="stylesheet" href="/src/css/cadastro.css" />
+  <link rel="stylesheet" href="/src/css/style.css" />
+  
+  <link rel="stylesheet" href="/src/css/footer.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/topbar.css" />
+</head>
+
+<body>
+  <main>
+    <!-- <button class="btn-voltar">Voltar</button> -->
+    <section class="container-principal">
+      <div class="banner-topo">
+        <h1>
+          Junte-se à nossa <span class="gradient-text">Rede de Talentos</span>
+        </h1>
+        <p class="subtext">
+          Compartilhe seu conhecimento e ajude a impulsionar a inovação tecnológica
+        </p>
+      </div>
+
+      <section class="menu-box">
+        <h3><i class="fa-regular fa-user"></i> Informações Pessoais</h3>
+        <div class="menu1">
+          <div class="campo">
+            <label>Nome Completo*</label>
+            <input type="text" id="nome" required />
+          </div>
+          <div class="campo">
+            <label>Email*</label>
+            <input type="email" id="email" required />
+          </div>
+          <div class="campo">
+            <label>Telefone*</label>
+            <input type="tel" id="telefone" required />
+          </div>
+          <div class="campo">
+            <label>Linkedin*</label>
+            <input type="url" id="linkedin" required />
+          </div>
+          <div class="campo">
+            <label>Cidade*</label>
+            <input type="text" id="cidade" required />
+          </div>
+          <div class="campo">
+            <label>UF*</label>
+            <input type="text" id="uf" required />
+          </div>
+          <div class="campo" style="grid-column: 1 / -1;">
+            <label>URL da Foto de Perfil</label>
+            <input type="url" id="foto_url" placeholder="https://exemplo.com/sua-foto.jpg" />
+          </div>
+        </div>
+      </section>
+
+      <section class="menu-box">
+        <h3><i class="fa-solid fa-briefcase"></i> Área de Atuação</h3>
+        <h5>Selecione a área onde você pode contribuir como talento.</h5>
+        <div class="botoes-areas" id="botoes-areas"></div>
+      </section>
+
+      <section class="menu-box">
+        <h3><i class="fa-regular fa-file-lines"></i> Experiências e Competências</h3>
+        <label>Principais Competências*</label>
+        <textarea id="competencias" placeholder="Liste e descreva suas competências" required></textarea>
+        <label>Resumo da Biografia*</label>
+        <textarea id="biografia" maxlength="500" required></textarea>
+      </section>
+
+      <button class="botao-finalizar">Cadastrar Talento</button>
+    </section>
+  </main>
+
+
+
+  <script src="../js/topbar.js"></script>
+  <script src="/src/js/footer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/src/js/suppabase-api.js"></script>
+  <script>
+    async function carregarAreasDeAtuacao() {
+      const container = document.getElementById("botoes-areas");
+      container.innerHTML = "Carregando...";
+      try {
+        const areas = await window.supabaseApi.getAll("atuacao");
+        if (!areas.length) {
+          container.innerHTML = "<p>Nenhuma área cadastrada.</p>";
+          return;
+        }
+        container.innerHTML = "";
+        areas.forEach(area => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "area-btn";
+          btn.textContent = area.nome;
+          btn.value = area.id;
+          btn.addEventListener("click", () => {
+            document.querySelectorAll(".area-btn").forEach(b => b.classList.remove("selected"));
+            btn.classList.add("selected");
+          });
+          container.appendChild(btn);
+        });
+      } catch (err) {
+        console.error("Erro ao carregar áreas:", err);
+        container.innerHTML = "<p>Erro ao carregar áreas de atuação.</p>";
+      }
+    }
+
+    async function main() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      const botao = document.querySelector(".botao-finalizar");
+
+      await carregarAreasDeAtuacao();
+
+      if (id) {
+        try {
+          const talento = await window.supabaseApi.getById("talento", id);
+
+          document.getElementById("nome").value = talento.nome;
+          document.getElementById("email").value = talento.email;
+          document.getElementById("telefone").value = talento.telefone;
+          document.getElementById("linkedin").value = talento.linkedin;
+          document.getElementById("cidade").value = talento.cidade;
+          document.getElementById("uf").value = talento.uf;
+          document.getElementById("foto_url").value = talento.foto_url || "";
+          document.getElementById("competencias").value = talento.competencia;
+          document.getElementById("biografia").value = talento.biografia;
+
+          const botaoArea = document.querySelector(`.area-btn[value="${talento.atuacao}"]`);
+          if (botaoArea) botaoArea.classList.add("selected");
+
+          botao.textContent = "Salvar Alterações";
+          botao.onclick = async () => await salvar(id);
+        } catch (err) {
+          console.error("Erro ao carregar talento:", err);
+          alert("Erro ao carregar dados para edição.");
+        }
+      } else {
+        botao.onclick = async () => await salvar();
+      }
+    }
+
+    async function salvar(id = null) {
+      const nome = document.getElementById("nome").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const telefone = document.getElementById("telefone").value.trim();
+      const linkedin = document.getElementById("linkedin").value.trim();
+      const cidade = document.getElementById("cidade").value.trim();
+      const uf = document.getElementById("uf").value.trim();
+      const competencia = document.getElementById("competencias").value.trim();
+      const biografia = document.getElementById("biografia").value.trim();
+      const areaSelecionada = document.querySelector(".area-btn.selected");
+      const foto_url = document.getElementById("foto_url").value.trim();
+
+      if (!nome || !email || !telefone || !linkedin || !cidade || !uf || !competencia || !biografia || !areaSelecionada) {
+        alert("Preencha todos os campos obrigatórios e selecione uma área.");
+        return;
+      }
+
+      const talento = {
+        nome, email, telefone, linkedin, cidade, uf,
+        competencia, biografia, atuacao: areaSelecionada.value, foto_url
+      };
+
+      try {
+        if (id) {
+          await window.supabaseApi.update("talento", `id=eq.${id}`, talento);
+          alert("Talento atualizado com sucesso!");
+        } else {
+          await window.supabaseApi.create("talento", talento);
+          alert("Talento cadastrado com sucesso!");
+        }
+        window.location.href = "/src/pages/talentos.html";
+      } catch (err) {
+        console.error("Erro ao salvar:", err);
+        alert("Erro ao salvar talento.");
+      }
+    }
+
+    main();
+  </script>
+</body>
+</html>

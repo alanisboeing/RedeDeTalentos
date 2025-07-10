@@ -1,0 +1,145 @@
+/* Container principal */
+.perfil-container {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Card do perfil */
+.card-perfil {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.06);
+  background-color: #fff;
+}
+
+/* Header com fundo gradiente */
+.card-header {
+  background: linear-gradient(90deg, #3ca7f7 0%, #a481f5 100%);
+  color: white;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+/* Foto do talento */
+.foto-wrapper {
+  width: 9rem;
+  height: 9rem;
+  border: 4px solid white;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 1rem;
+  background: white;
+  margin-top: 0.5rem;
+}
+
+.foto-talento {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Nome e tags */
+.info-nome-tags {
+  flex: 1;
+  min-width: 200px;
+}
+
+.info-nome-tags h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.tags {
+  margin-top: 0.5rem;
+}
+
+.tag {
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 0.3rem 0.7rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin-right: 0.3rem;
+  display: inline-block;
+}
+
+/* Corpo do card */
+.card-body {
+  padding: 2rem;
+  background: white;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+.descricao,
+.competencia,
+.localizacao {
+  margin-top: 1rem;
+}
+
+.localizacao h3,
+.descricao h3,
+.competencia h3 {
+  margin-bottom: 0.5rem;
+}
+
+/* Contatos no header */
+.contato-icons-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Botões de copiar */
+.copy-btn {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 1.2rem;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.copy-btn:hover {
+  color: #e0e0ff;
+}
+
+.copy-btn .tooltip {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #5e17eb;
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.copy-btn:hover .tooltip {
+  opacity: 1;
+}
+
+.copy-btn.copied .tooltip {
+  opacity: 1;
+  background-color: #31c48d;
+  content: "Copiado!";
+}
+ a {
+  text-decoration: none;
+  list-style: none;
+  color: #ffffff;
+ }

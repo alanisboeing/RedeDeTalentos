@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil do Talento</title>
+  <link rel="stylesheet" href="/src/css/footer.css" />
+  <link rel="stylesheet" href="/src/css/style.css" />
+  <link rel="stylesheet" href="/src/css/topbar.css">
+  <link rel="stylesheet" href="/src/css/ver-perfil.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+ 
+</head>
+
+<body>
+  <main class="perfil-container">
+    <div class="card-perfil">
+      <div class="card-header">
+        <div class="foto-wrapper">
+          <img id="foto-talento" class="foto-talento" src="" alt="Foto do Talento">
+        </div>
+
+        <div class="info-nome-tags">
+          <h2 id="nome-talento">Nome do Talento</h2>
+          <div class="tags"></div>
+          <div class="contato-icons-header">
+            <button id="copy-email" class="copy-btn"><i data-lucide="mail"></i><span class="tooltip">Copiar email</span></button>
+            
+            <button id="copy-phone" class="copy-btn"><i data-lucide="phone"></i><span class="tooltip">Copiar número</span></button>
+            <button id="linkedin-btn" class="copy-btn">
+              <i data-lucide="linkedin"></i>
+              <span class="tooltip">Abrir Linkedin</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <section class="localizacao">
+          <h3>Localização</h3>
+          <p id="localizacao-talento">Não informado</p>
+        </section>
+
+        <section class="descricao">
+          <h3>Sobre o Talento</h3>
+          <p id="descricao-talento">Sem descrição informada.</p>
+        </section>
+
+        <section class="competencia">
+          <h3>Experiência e Competências</h3>
+          <ul id="experiencia-competencia">
+            <li>Sem competências informadas.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="/src/js/topbar.js"></script>
+  <script src="/src/js/footer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/src/js/suppabase-api.js"></script>
+  <script>
+    lucide.createIcons();
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const params = new URLSearchParams(window.location.search);
+      const talentoId = params.get("id");
+
+      if (!talentoId) {
+        alert("ID do talento não informado na URL.");
+        return;
+      }
+
+      try {
+        const talento = await window.supabaseApi.getById("talento", talentoId);
+
+        document.getElementById("nome-talento").textContent = talento.nome || "Sem nome";
+        document.getElementById("descricao-talento").textContent = talento.biografia || "Sem descrição informada.";
+
+        const foto = document.getElementById("foto-talento");
+        foto.src = talento.foto_url || "/src/images/default-user.png";
+        foto.alt = talento.nome;
+
+        const tagsContainer = document.querySelector(".tags");
+        tagsContainer.innerHTML = "";
+        if (talento.atuacao) {
+          const area = await window.supabaseApi.getById("atuacao", talento.atuacao);
+          if (area?.nome) {
+            const tag = document.createElement("span");
+            tag.className = "tag";
+            tag.textContent = area.nome;
+            tagsContainer.appendChild(tag);
+          }
+        }
+
+        // Localização
+        const localizacao = [talento.cidade, talento.uf].filter(Boolean).join(" - ");
+        document.getElementById("localizacao-talento").textContent = localizacao || "Não informado";
+
+        // Ações de copiar
+        document.getElementById("copy-email").setAttribute("data-copy", talento.email || "");
+        document.getElementById("copy-phone").setAttribute("data-copy", talento.telefone || "");
+
+        document.querySelectorAll(".copy-btn").forEach(btn => {
+          const value = btn.getAttribute("data-copy");
+          if (value) {
+            btn.addEventListener("click", () => {
+              navigator.clipboard.writeText(value).then(() => {
+                btn.classList.add("copied");
+                const tooltip = btn.querySelector(".tooltip");
+                tooltip.textContent = "Copiado!";
+                setTimeout(() => {
+                  btn.classList.remove("copied");
+                  tooltip.textContent = "Copiar";
+                }, 2000);
+              });
+            });
+          }
+        });
+
+   // Botão do LinkedIn com window.open usando URL completa
+const linkedinBtn = document.getElementById("linkedin-btn");
+linkedinBtn.addEventListener("click", () => {
+  if (talento.linkedin) {
+    const url = talento.linkedin.startsWith("http") ? talento.linkedin : `https://${talento.linkedin}`;
+    window.open(url, "_blank");
+  }
+});
+
+
+        // Competências
+        const compList = document.getElementById("experiencia-competencia");
+        compList.innerHTML = "";
+        if (talento.competencia) {
+          const competencias = talento.competencia.split(",").map(s => s.trim());
+          competencias.forEach(comp => {
+            const li = document.createElement("li");
+            li.textContent = comp;
+            compList.appendChild(li);
+          });
+        } else {
+          compList.innerHTML = "<li>Sem competências informadas.</li>";
+        }
+
+      } catch (err) {
+        console.error("Erro ao carregar perfil:", err);
+        alert("Erro ao carregar perfil do talento.");
+      }
+    });
+  </script>
+</body>
+
+</html>
