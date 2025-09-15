@@ -1,4 +1,4 @@
-/* Já deve existir no seu topbar.css */
+
 .topbar {
     width: 100%;
     background-color: #ffffff;
@@ -7,6 +7,7 @@
     position: fixed;
     top: 0;
     z-index: 10;
+    
   }
   
   .topbar-container {
@@ -20,6 +21,11 @@
   .logo-img {
     height: 40px;
     object-fit: contain;
+    padding: 0rem;
+  }
+  .logo-link {
+    
+    padding: 0rem;
   }
   
   /* Dropdown */
@@ -38,6 +44,10 @@
     background-color: transparent;
     cursor: pointer;
     transition: 0.2s ease;
+  }
+
+  .mobile {
+    display: none;
   }
   
   .btn-adm:hover {
@@ -91,5 +101,26 @@
   .dropdown-menu.show-dropdown {
     display: block;
   }
+
+  /* MOBILE */
+
+@media screen and (max-width: 480px) {
+  .logo-img {
+    height: 35px;
+    object-fit: contain;
+  }
+  .topbar {
+
+    padding: 1rem;
+
+  }
+  .btn-adm {
+    display: none;
+  }
+  .mobile{
+    display: block;
+  }
+}
+
   
   

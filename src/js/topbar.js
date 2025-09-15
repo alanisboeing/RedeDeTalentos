@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </a>
         <div class="dropdown">
           <button class="btn-adm" id="dropdownToggle">Administrador ▾</button>
+          <button class="btn-adm mobile" id="dropdownToggle">Adm ▾</button>
           <div class="dropdown-menu" id="dropdownMenu">
             <a href="/src/pages/area-atuacao.html">Áreas de atuação</a>
             <a href="/src/pages/talentos.html">Talentos</a>
