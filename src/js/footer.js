@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Conectando talentos e acelerando inovação<br>
             através de mentorias especializadas para o crescimento de negócios tecnológicos.
           </p>
-          <span>&copy; 2025 RedeTalentos. Todos os direitos reservados.</span>
+          
         </div>
 
         <div class="footer-contact">
@@ -21,7 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
             <li>Criciúma, SC</li>
           </ul>
         </div>
+        <span>&copy; 2025 RedeTalentos. Todos os direitos reservados.</span>
       </div>
+      
     </footer>
   `;
 

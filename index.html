@@ -11,7 +11,7 @@
     />
     <link rel="stylesheet" href="./src/css/topbar.css" />
     <link rel="stylesheet" href="./src/css/footer.css" />
-    <link rel="stylesheet" href="./src/css/home-style/desktop.css" />
+    <link rel="stylesheet" href="./src/css/home.css" />
     <link rel="stylesheet" href="./src/css/style.css" media="all" />
     <link rel="stylesheet" href="./src/css/listagem-talentos.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -26,8 +26,8 @@
         </h1>
         <p class="subtext">
           Conecte-se com talentos especializados para orientação estratégica e
-          técnica em projetos inovadores e acelere seu crescimento no ecossistema
-          de tecnologia.
+          técnica em projetos inovadores e acelere seu crescimento no
+          ecossistema de tecnologia.
         </p>
 
         <section class="rede-numeros">
@@ -75,36 +75,35 @@
     <script src="/src/js/footer.js"></script>
     <script src="/src/js/topbar.js"></script>
 
-
     <!-- JS com renderização de filtros + cards -->
     <script type="module">
-      import { renderizarTalentos } from '/src/js/lista-talentos.js';
-    
+      import { renderizarTalentos } from "/src/js/lista-talentos.js";
+
       renderizarTalentos({
         containerId: "grid-talentos",
         filtrosId: "filtros-tags",
-        exibirAcoes: false
+        exibirAcoes: false,
       });
-    
+
       const filtros = document.getElementById("filtros-tags");
       const grid = document.querySelector(".grid-talentos");
       const areasGrid = document.getElementById("areas-grid");
-    
+
       let areasMap = {};
       let talentosCache = [];
-    
+
       async function carregarNuvemAreas() {
         try {
           const areas = await window.supabaseApi.getAll("atuacao");
           areasGrid.innerHTML = "";
-    
+
           areas.forEach((area) => {
             const span = document.createElement("span");
             span.classList.add("area");
             span.textContent = area.nome;
             areasGrid.appendChild(span);
           });
-    
+
           // Atualiza o contador de áreas, se existir
           const totalAreas = document.getElementById("total-areas");
           if (totalAreas) totalAreas.textContent = areas.length;
@@ -112,16 +111,16 @@
           console.error("Erro ao carregar nuvem de áreas:", error);
         }
       }
-    
+
       async function carregarAreas() {
         const areas = await window.supabaseApi.getAll("atuacao");
         filtros.innerHTML = "";
-    
+
         areasMap = areas.reduce((map, area) => {
           map[area.id] = area.nome;
           return map;
         }, {});
-    
+
         areas.forEach((area) => {
           const span = document.createElement("span");
           span.textContent = area.nome;
@@ -130,26 +129,25 @@
           filtros.appendChild(span);
         });
       }
-    
+
       function filtrarPorArea(areaId, selectedTag) {
-        document.querySelectorAll(".filtro-tag").forEach(tag => {
+        document.querySelectorAll(".filtro-tag").forEach((tag) => {
           tag.classList.remove("ativo");
         });
         selectedTag.classList.add("ativo");
-    
-        const filtrados = talentosCache.filter(t => t.atuacao === areaId);
+
+        const filtrados = talentosCache.filter((t) => t.atuacao === areaId);
         renderizarTalentos({
           containerId: "grid-talentos",
           filtrosId: "filtros-tags",
           talentosExternos: filtrados,
-          exibirAcoes: false
+          exibirAcoes: false,
         });
       }
-    
+
       carregarAreas();
       carregarNuvemAreas();
       lucide.createIcons();
     </script>
-    
   </body>
 </html>

@@ -40,7 +40,7 @@
   background-color: #f9fafb;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .card-nuvem h2 {
@@ -69,8 +69,6 @@
   white-space: nowrap;
   transition: all 0.3s ease;
   color: #6366f1;
-
-
 }
 
 .cards-destaque {
@@ -130,20 +128,17 @@
   margin-bottom: 0.5rem;
 }
 
-@media screen and (max-width: 500px) {
+@media (max-width: 500px) {
   .cards-destaque {
-
     width: 100%;
   }
   .subtext {
-  
     font-size: 0.85rem;
-   
   }
 }
 /* TABLET */
 
-@media screen and (min-width: 501px) and (max-width: 850px) {
+@media (min-width: 501px) and (max-width: 850px) {
   .cards-destaque {
     display: flex;
     flex-direction: row;
@@ -153,5 +148,3 @@
     width: 100%;
   }
 }
-  
-  
